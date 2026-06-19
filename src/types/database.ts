@@ -101,6 +101,10 @@ export interface Database {
         Args: { p_username: string; p_user_id?: string };
         Returns: void;
       };
+      is_username_available: {
+        Args: { p_username: string };
+        Returns: boolean;
+      };
     };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;

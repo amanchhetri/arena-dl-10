@@ -14,12 +14,12 @@ export function useUsernameAvailable(rawUsername: string) {
     queryFn: async (): Promise<{ available: boolean; reason?: string }> => {
       if (!username) return { available: false };
       if (RESERVED_USERNAMES.includes(username)) return { available: false, reason: 'reserved' };
-      const { count, error } = await supabase
-        .from('users')
-        .select('id', { count: 'exact', head: true })
-        .eq('username', username);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data, error } = await (supabase.rpc as any)('is_username_available', {
+        p_username: username,
+      });
       if (error) throw error;
-      return { available: (count ?? 0) === 0 };
+      return { available: Boolean(data) };
     },
   });
 }

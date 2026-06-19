@@ -9,7 +9,11 @@
     "userInterfaceStyle": "dark",
     "ios": {
       "bundleIdentifier": "app.challengearena",
-      "supportsTablet": false
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Snap proof of completed challenges.",
+        "NSPhotoLibraryUsageDescription": "Pick proof of completed challenges from your library."
+      }
     },
     "android": {
       "package": "app.challengearena",
@@ -24,7 +28,19 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-router", "expo-status-bar", "expo-localization", "@sentry/react-native"],
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      "expo-localization",
+      "@sentry/react-native",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Pick proof of completed challenges from your library.",
+          "cameraPermission": "Snap proof of completed challenges."
+        }
+      ]
+    ],
     "experiments": {
       "typedRoutes": true
     }

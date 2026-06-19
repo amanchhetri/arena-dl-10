@@ -77,6 +77,18 @@
     "streakDay": "1 day streak",
     "noStreak": "Start your streak"
   },
+  "proof": {
+    "sheetTitle": "Submit proof",
+    "honorPrompt": "Are you sure you did this?",
+    "honorConfirm": "Yes, mark done",
+    "honorCancel": "Not yet",
+    "photoPick": "Pick a photo",
+    "photoTake": "Take photo (coming soon)",
+    "uploading": "Uploading…",
+    "errors": {
+      "cancelled": "Pick cancelled — try again when you're ready"
+    }
+  },
   "profile": {
     "stats": {
       "xp": "XP",

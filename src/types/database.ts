@@ -105,6 +105,19 @@ export interface Database {
         Args: { p_username: string };
         Returns: boolean;
       };
+      submit_completion: {
+        Args: { p_accept_id: string; p_proof_url?: string | null };
+        Returns: {
+          idempotent: boolean;
+          completion_id: string;
+          xp_awarded: number;
+          new_total_xp: number;
+          new_level: number;
+          level_changed: boolean;
+          new_streak: number;
+          streak_changed: boolean;
+        };
+      };
     };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;

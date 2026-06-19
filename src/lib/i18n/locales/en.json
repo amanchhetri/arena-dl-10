@@ -8,6 +8,37 @@
     "continueWithGoogle": "Continue with Google",
     "continueWithEmail": "Continue with Email"
   },
+  "auth": {
+    "sendingMagicLink": "Sending…",
+    "emailSentTitle": "Check your inbox",
+    "emailSentBody": "We sent a sign-in link to {{email}}. Tap the link to come back here.",
+    "resend": "Resend",
+    "useDifferentEmail": "Use a different email",
+    "emailPlaceholder": "you@example.com",
+    "signOut": "Sign out",
+    "errors": {
+      "generic": "Something went wrong. Try again."
+    }
+  },
+  "onboarding": {
+    "stepOf": "Step {{step}} of {{total}}",
+    "username": {
+      "title": "Pick your username",
+      "continue": "Continue"
+    },
+    "interests": {
+      "title": "What's your vibe?",
+      "subtitle": "Pick up to 5",
+      "skip": "Skip for now",
+      "continue": "Continue"
+    },
+    "notifications": {
+      "title": "Keep your flame alive",
+      "body": "We'll send one nudge in the evening if your streak's about to break. That's it.",
+      "enable": "Turn on reminders",
+      "later": "Maybe later"
+    }
+  },
   "legal": {
     "terms": "Terms",
     "privacy": "Privacy"

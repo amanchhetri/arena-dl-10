@@ -1,0 +1,15 @@
+{
+  "app": {
+    "name": "Challenge Arena",
+    "tagline": "Get XP for doing literally anything"
+  },
+  "signIn": {
+    "continueWithApple": "Continue with Apple",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithEmail": "Continue with Email"
+  },
+  "legal": {
+    "terms": "Terms",
+    "privacy": "Privacy"
+  }
+}

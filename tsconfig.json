@@ -5,32 +5,15 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
+    "types": ["jest", "node"],
     "paths": {
-      "@/features/*": [
-        "./src/features/*"
-      ],
-      "@/ui/*": [
-        "./src/ui/*"
-      ],
-      "@/lib/*": [
-        "./src/lib/*"
-      ],
-      "@/theme/*": [
-        "./src/theme/*"
-      ],
-      "@/types/*": [
-        "./src/types/*"
-      ],
-      "@/app/*": [
-        "./app/*"
-      ]
+      "@/features/*": ["./src/features/*"],
+      "@/ui/*": ["./src/ui/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/theme/*": ["./src/theme/*"],
+      "@/types/*": ["./src/types/*"],
+      "@/app/*": ["./app/*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts",
-    "nativewind-env.d.ts"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", "nativewind-env.d.ts"]
 }

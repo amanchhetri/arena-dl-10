@@ -39,6 +39,53 @@
       "later": "Maybe later"
     }
   },
+  "tabs": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "profile": "Profile"
+  },
+  "catalog": {
+    "title": "Catalog",
+    "all": "All",
+    "fitness": "Fitness",
+    "study": "Study",
+    "habit": "Habit",
+    "dare": "Dare",
+    "creative": "Creative"
+  },
+  "challenge": {
+    "accept": "⚡ Accept Challenge",
+    "submitProof": "Submit Proof",
+    "completedToday": "Completed today",
+    "comingSoon": "Submit flow lands in Plan 4",
+    "proofRequired": {
+      "honor": "Honor system — tap to mark done",
+      "photo": "Snap a photo to complete",
+      "video": "Record a short clip to complete",
+      "peer": "Group members vote to approve"
+    }
+  },
+  "home": {
+    "greeting": "Hey @{{username}}",
+    "today": "TODAY",
+    "suggested": "SUGGESTED FOR YOU",
+    "emptyToday": "No active challenges. Pick one from the Catalog →",
+    "loading": "Loading…",
+    "level": "Level {{level}}",
+    "xpProgress": "{{current}} / {{next}}",
+    "streakDays": "{{count}} day streak",
+    "streakDay": "1 day streak",
+    "noStreak": "Start your streak"
+  },
+  "profile": {
+    "stats": {
+      "xp": "XP",
+      "streak": "streak",
+      "completed": "completed",
+      "longest": "Longest streak: {{n}} day",
+      "longestPlural": "Longest streak: {{n}} days"
+    }
+  },
   "legal": {
     "terms": "Terms",
     "privacy": "Privacy"

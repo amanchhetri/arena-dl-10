@@ -1,17 +1,30 @@
 import { useRouter } from 'expo-router';
-import { ActivityIndicator, FlatList, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { useState } from 'react';
+import {
+  ActivityIndicator,
+  RefreshControl,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
+import { useQueryClient } from '@tanstack/react-query';
 import { ChallengeCard } from '@/features/challenges/components/ChallengeCard';
 import { useMyAccepts } from '@/features/challenges/api/useMyAccepts';
 import { useSuggestedChallenges } from '@/features/challenges/api/useSuggestedChallenges';
 import { useAuthStore } from '@/features/auth/store';
 import { levelFromXp, xpToNextLevel } from '@/lib/challenge';
+import { EmptyState } from '@/ui/EmptyState';
 import { t } from '@/lib/i18n';
 
 export default function Home() {
   const router = useRouter();
   const profile = useAuthStore((s) => s.profile);
+  const userId = useAuthStore((s) => s.session?.user.id);
   const { data: accepts, isLoading: acceptsLoading } = useMyAccepts('accepted');
   const { data: suggested } = useSuggestedChallenges();
+  const qc = useQueryClient();
+  const [refreshing, setRefreshing] = useState(false);
 
   const totalXp = Number(profile?.total_xp ?? 0);
   const level = levelFromXp(totalXp);
@@ -25,9 +38,27 @@ export default function Home() {
         ? t('home.streakDay')
         : t('home.streakDays', { count: currentStreak });
 
+  async function onRefresh() {
+    setRefreshing(true);
+    try {
+      await Promise.all([
+        qc.invalidateQueries({ queryKey: ['accepts', 'mine', userId] }),
+        qc.invalidateQueries({ queryKey: ['challenges', 'suggested', userId] }),
+        qc.invalidateQueries({ queryKey: ['users', userId] }),
+      ]);
+    } finally {
+      setRefreshing(false);
+    }
+  }
+
   return (
     <SafeAreaView className="flex-1 bg-bg-base">
-      <ScrollView contentContainerStyle={{ padding: 24, paddingBottom: 160 }}>
+      <ScrollView
+        contentContainerStyle={{ padding: 24, paddingBottom: 32 }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#A855F7" />
+        }
+      >
         <View className="flex-row items-center justify-between">
           <Text className="font-display text-2xl text-text-primary">
             {t('home.greeting', { username: profile?.username ?? '' })}
@@ -59,7 +90,14 @@ export default function Home() {
         {acceptsLoading ? (
           <ActivityIndicator className="mt-4" />
         ) : !accepts || accepts.length === 0 ? (
-          <Text className="mt-4 text-sm text-text-muted">{t('home.emptyToday')}</Text>
+          <EmptyState
+            emoji="🎯"
+            label={t('home.emptyToday')}
+            cta={{
+              label: t('tabs.catalog'),
+              onPress: () => router.push('/(tabs)/catalog'),
+            }}
+          />
         ) : (
           <View className="mt-3 gap-3">
             {accepts.map((a) => (
@@ -78,23 +116,23 @@ export default function Home() {
         <Text className="mt-8 text-xs font-semibold tracking-widest text-text-muted">
           {t('home.suggested')}
         </Text>
+        {suggested && suggested.length > 0 ? (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ gap: 12, paddingTop: 12 }}
+          >
+            {suggested.map((c) => (
+              <ChallengeCard
+                key={c.id}
+                challenge={c}
+                size="compact"
+                onPress={() => router.push({ pathname: '/challenge/[id]', params: { id: c.id } })}
+              />
+            ))}
+          </ScrollView>
+        ) : null}
       </ScrollView>
-      <View className="absolute bottom-20 left-0 right-0">
-        <FlatList
-          horizontal
-          data={suggested ?? []}
-          keyExtractor={(c) => c.id}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingHorizontal: 24, gap: 12 }}
-          renderItem={({ item }) => (
-            <ChallengeCard
-              challenge={item}
-              size="compact"
-              onPress={() => router.push({ pathname: '/challenge/[id]', params: { id: item.id } })}
-            />
-          )}
-        />
-      </View>
     </SafeAreaView>
   );
 }

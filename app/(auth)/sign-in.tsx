@@ -1,37 +1,24 @@
 import { useRouter } from 'expo-router';
-import { Alert, Platform, SafeAreaView, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Alert, SafeAreaView, Text, View } from 'react-native';
 import { ProviderButton } from '@/features/auth/components/ProviderButton';
+import { EmailPromptSheet } from '@/features/auth/components/EmailPromptSheet';
 import { useSignInWithEmail } from '@/features/auth/api/useSignInWithEmail';
 import { t } from '@/lib/i18n';
 
 export default function SignIn() {
   const router = useRouter();
   const emailMutation = useSignInWithEmail();
+  const [emailSheetOpen, setEmailSheetOpen] = useState(false);
 
-  function handleEmail() {
-    if (Platform.OS !== 'ios') {
-      Alert.alert(
-        'Coming soon',
-        'Cross-platform email input lands in a follow-up; use the iOS simulator or device for now.',
-      );
-      return;
+  async function handleEmailSubmit(rawEmail: string) {
+    try {
+      const email = await emailMutation.mutateAsync(rawEmail);
+      setEmailSheetOpen(false);
+      router.push({ pathname: '/(auth)/email-sent', params: { email } });
+    } catch (e) {
+      Alert.alert(t('auth.errors.generic'), (e as Error).message);
     }
-    Alert.prompt(
-      t('signIn.continueWithEmail'),
-      t('auth.emailPlaceholder'),
-      async (input?: string) => {
-        if (!input) return;
-        try {
-          const email = await emailMutation.mutateAsync(input);
-          router.push({ pathname: '/(auth)/email-sent', params: { email } });
-        } catch (e) {
-          Alert.alert(t('auth.errors.generic'), (e as Error).message);
-        }
-      },
-      'plain-text',
-      '',
-      'email-address',
-    );
   }
 
   return (
@@ -64,7 +51,7 @@ export default function SignIn() {
           <ProviderButton
             provider="email"
             label={t('signIn.continueWithEmail')}
-            onPress={handleEmail}
+            onPress={() => setEmailSheetOpen(true)}
             busy={emailMutation.isPending}
           />
         </View>
@@ -74,6 +61,13 @@ export default function SignIn() {
         <Text className="text-xs text-text-muted">·</Text>
         <Text className="text-xs text-text-muted">{t('legal.privacy')}</Text>
       </View>
+
+      <EmailPromptSheet
+        visible={emailSheetOpen}
+        busy={emailMutation.isPending}
+        onClose={() => setEmailSheetOpen(false)}
+        onSubmit={handleEmailSubmit}
+      />
     </SafeAreaView>
   );
 }

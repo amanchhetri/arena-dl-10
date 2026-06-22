@@ -9,6 +9,7 @@ import { initAnalytics } from '@/lib/analytics/client';
 import { initSentry } from '@/lib/sentry';
 import { useAuthStore } from '@/features/auth/store';
 import { useCurrentUserProfile } from '@/features/auth/api/useCurrentUserProfile';
+import { ErrorBoundary } from '@/ui/ErrorBoundary';
 
 initSentry();
 
@@ -56,7 +57,9 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthRouter />
+      <ErrorBoundary>
+        <AuthRouter />
+      </ErrorBoundary>
     </QueryClientProvider>
   );
 }

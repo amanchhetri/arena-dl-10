@@ -1,15 +1,19 @@
-import { SafeAreaView, Text, View } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Pressable, SafeAreaView, Text, View } from 'react-native';
 import { Button } from '@/ui/Button';
 import { StatTile } from '@/ui/StatTile';
 import { useAuthStore } from '@/features/auth/store';
 import { useSignOut } from '@/features/auth/api/useSignOut';
 import { useMyAccepts } from '@/features/challenges/api/useMyAccepts';
+import { useShareProfile } from '@/features/share/api/useShareProfile';
 import { levelFromXp } from '@/lib/challenge';
 import { t } from '@/lib/i18n';
 
 export default function ProfileTab() {
+  const router = useRouter();
   const profile = useAuthStore((s) => s.profile);
   const signOut = useSignOut();
+  const shareProfile = useShareProfile();
   const { data: completed } = useMyAccepts('completed');
 
   const level = levelFromXp(Number(profile?.total_xp ?? 0));
@@ -44,7 +48,20 @@ export default function ProfileTab() {
 
         <Text className="mt-4 text-center text-xs text-text-muted">{longestLabel}</Text>
       </View>
-      <View className="px-6 pb-8">
+      <View className="gap-3 px-6 pb-8">
+        <Pressable
+          onPress={() => router.push('/settings')}
+          className="items-center rounded-2xl bg-bg-surface px-4 py-3 active:opacity-80"
+        >
+          <Text className="text-base font-semibold text-text-primary">{t('settings.title')}</Text>
+        </Pressable>
+        <Button
+          variant="ghost"
+          onPress={() => shareProfile.mutate()}
+          disabled={shareProfile.isPending}
+        >
+          {t('share.profile.button')}
+        </Button>
         <Button variant="ghost" onPress={() => signOut.mutate()}>
           {t('auth.signOut')}
         </Button>

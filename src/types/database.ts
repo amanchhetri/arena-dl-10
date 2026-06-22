@@ -105,6 +105,10 @@ export interface Database {
         Args: { p_username: string };
         Returns: boolean;
       };
+      delete_my_account: {
+        Args: Record<string, never>;
+        Returns: void;
+      };
       submit_completion: {
         Args: { p_accept_id: string; p_proof_url?: string | null };
         Returns: {

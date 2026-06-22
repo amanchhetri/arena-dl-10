@@ -98,6 +98,53 @@
       "longestPlural": "Longest streak: {{n}} days"
     }
   },
+  "settings": {
+    "title": "Settings",
+    "notifications": {
+      "section": "NOTIFICATIONS",
+      "eveningTime": "Evening reminder time",
+      "set": "Set time"
+    },
+    "privacy": {
+      "section": "PRIVACY",
+      "publicProfile": "Public profile",
+      "publicProfileHint": "Lets your stats appear on shared cards"
+    },
+    "account": {
+      "section": "ACCOUNT",
+      "displayName": "Display name",
+      "username": "Username",
+      "email": "Email"
+    },
+    "danger": {
+      "section": "DANGER ZONE",
+      "deleteAccount": "Delete account",
+      "deleteConfirmTitle": "Delete @{{username}}?",
+      "deleteConfirmBody": "This wipes your XP, streaks, accepts, completions, and any uploaded proof. There is no undo.",
+      "deleteConfirmAction": "Yes, delete everything",
+      "deleting": "Deleting…"
+    },
+    "saved": "Saved",
+    "displayName": {
+      "title": "Display name",
+      "placeholder": "How others see you",
+      "save": "Save"
+    }
+  },
+  "share": {
+    "profile": {
+      "title": "Check out my Challenge Arena profile",
+      "message": "I'm @{{username}} on Challenge Arena — {{xp}} XP, {{streak}} day streak 🔥",
+      "button": "Share my profile"
+    }
+  },
+  "errors": {
+    "boundary": {
+      "title": "Something broke",
+      "body": "We logged the error and the team will look at it. Try restarting the app.",
+      "reload": "Reload"
+    }
+  },
   "legal": {
     "terms": "Terms",
     "privacy": "Privacy"

@@ -1,4 +1,12 @@
 \set ON_ERROR_STOP on
+
+-- NOTE: This test inserts challenges with group_id = 'ffffffff-...' as a sentinel
+-- because the challenges_creator_consistency CHECK constraint (migration 0015)
+-- requires both created_by AND group_id to be non-null on custom challenges.
+-- There is no FK on challenges.group_id today. If a future migration adds
+-- `REFERENCES public.groups(id)`, this test must be updated to seed a real
+-- groups row first; otherwise the challenge INSERT will fail on the FK.
+
 begin;
 
 insert into auth.users (id, instance_id, aud, role, email, encrypted_password, created_at, updated_at)

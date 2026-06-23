@@ -2,6 +2,13 @@
 -- Run: psql "$DB_URL" -f supabase/tests/schema_constraints.test.sql
 \set ON_ERROR_STOP on
 
+-- NOTE: This test inserts challenges with group_id = 'ffffffff-...' as a sentinel
+-- because the challenges_creator_consistency CHECK constraint (migration 0015)
+-- requires both created_by AND group_id to be non-null on custom challenges.
+-- There is no FK on challenges.group_id today. If a future migration adds
+-- `REFERENCES public.groups(id)`, this test must be updated to seed a real
+-- groups row first; otherwise the challenge INSERT will fail on the FK.
+
 begin;
 
 ------------------------------------------------------------

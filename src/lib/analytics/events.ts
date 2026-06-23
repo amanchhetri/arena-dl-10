@@ -30,6 +30,15 @@ export type EventPayloads = {
   member_kicked: { group_id: string };
   invite_code_regenerated: { group_id: string };
   invite_code_shared: { group_id: string };
+  // Slice 2 Plan 2
+  group_challenge_created: {
+    group_id: string;
+    challenge_id: string;
+    difficulty: string;
+    proof_type: string;
+  };
+  group_challenge_updated: { group_id: string; challenge_id: string };
+  group_challenge_deleted: { group_id: string; challenge_id: string; by_owner: boolean };
 };
 
 export type EventName = keyof EventPayloads;

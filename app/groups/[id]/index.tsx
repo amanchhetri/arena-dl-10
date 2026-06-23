@@ -3,6 +3,7 @@ import { ActivityIndicator, Pressable, SafeAreaView, ScrollView, Text, View } fr
 import { ThemeAccent } from '@/features/groups/components/ThemeAccent';
 import { MemberAvatarRow } from '@/features/groups/components/MemberAvatarRow';
 import { InviteCodeCard } from '@/features/groups/components/InviteCodeCard';
+import { GroupChallengesSection } from '@/features/groups/components/GroupChallengesSection';
 import { useGroup } from '@/features/groups/api/useGroup';
 import { useGroupMembers } from '@/features/groups/api/useGroupMembers';
 import { useShareInviteCode } from '@/features/groups/api/useShareInviteCode';
@@ -51,6 +52,13 @@ export default function GroupHome() {
           <MemberAvatarRow members={members ?? []} maxShown={5} />
         </Pressable>
 
+        <GroupChallengesSection
+          groupId={group.id}
+          onChallengePress={(cid) => router.push(`/challenge/${cid}`)}
+          onSeeAll={() => router.push(`/groups/${group.id}/catalog`)}
+          onCreateFirst={() => router.push(`/groups/${group.id}/create-challenge`)}
+        />
+
         <InviteCodeCard
           code={group.invite_code}
           isOwner={isOwner}
@@ -66,11 +74,6 @@ export default function GroupHome() {
           }
           regenerating={regenerateMutation.isPending}
         />
-
-        <View className="items-center rounded-2xl bg-bg-surface px-4 py-8">
-          <Text className="mb-2 text-2xl">🚧</Text>
-          <Text className="text-center text-sm text-text-muted">{t('groups.home.comingSoon')}</Text>
-        </View>
       </ScrollView>
     </SafeAreaView>
   );

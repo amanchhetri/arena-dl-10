@@ -220,6 +220,53 @@
       "reload": "Reload"
     }
   },
+  "groupChallenges": {
+    "section": {
+      "title": "CHALLENGES",
+      "seeAll": "See all ({{count}})"
+    },
+    "empty": {
+      "label": "No challenges yet",
+      "cta": "Create the first challenge"
+    },
+    "catalog": {
+      "title": "Catalog",
+      "newButton": "+ New",
+      "empty": "Nothing in this group yet"
+    },
+    "create": {
+      "title": "New challenge",
+      "titlePlaceholder": "What's the challenge?",
+      "descriptionPlaceholder": "Details (optional)",
+      "categoryLabel": "Category",
+      "difficultyLabel": "Difficulty",
+      "proofLabel": "Proof",
+      "proofHonor": "Honor",
+      "proofPhoto": "Photo",
+      "submit": "Create challenge"
+    },
+    "edit": {
+      "title": "Edit challenge",
+      "save": "Save changes",
+      "delete": "Delete challenge",
+      "deleteConfirmTitle": "Delete this challenge?",
+      "deleteConfirmBody": "Members will lose access immediately. Completed submissions stay on the record.",
+      "deleteConfirmAction": "Yes, delete"
+    },
+    "difficulty": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard",
+      "epic": "Epic",
+      "xpPreview": "+{{xp}} XP"
+    },
+    "errors": {
+      "notMember": "You must be a group member to do this.",
+      "notAuthorized": "Only the creator or group owner can edit this challenge.",
+      "videoNotSupported": "Video proof isn't supported yet.",
+      "peerNotSupported": "Peer-approval proof isn't supported yet."
+    }
+  },
   "legal": {
     "terms": "Terms",
     "privacy": "Privacy"

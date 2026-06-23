@@ -26,7 +26,11 @@ export function useMyAccepts(status: AcceptStatus | 'all' = 'accepted') {
       if (status !== 'all') q = q.eq('status', status);
       const { data, error } = await q;
       if (error) throw error;
-      return (data ?? []) as unknown as AcceptWithChallenge[];
+      const rows = (data ?? []) as unknown as AcceptWithChallenge[];
+      // Defensive: RLS hides soft-deleted challenges, so the join can return
+      // accepts with null challenge. Filter them out so screens never crash on
+      // <ChallengeCard challenge={null} />.
+      return rows.filter((a) => a.challenge != null);
     },
   });
 }

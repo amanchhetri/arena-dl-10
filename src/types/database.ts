@@ -181,6 +181,31 @@ export interface Database {
         Args: { p_group_id: string };
         Returns: void;
       };
+      create_group_challenge: {
+        Args: {
+          p_group_id: string;
+          p_title: string;
+          p_description: string | null;
+          p_category: string;
+          p_difficulty: string;
+          p_proof_type: string;
+        };
+        Returns: { challenge_id: string };
+      };
+      update_group_challenge: {
+        Args: {
+          p_challenge_id: string;
+          p_title?: string | null;
+          p_description?: string | null;
+          p_difficulty?: string | null;
+          p_proof_type?: string | null;
+        };
+        Returns: void;
+      };
+      delete_group_challenge: {
+        Args: { p_challenge_id: string };
+        Returns: void;
+      };
     };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;

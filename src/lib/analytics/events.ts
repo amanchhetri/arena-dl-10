@@ -22,6 +22,14 @@ export type EventPayloads = {
   streak_milestone_hit: { streak_length: number };
   level_up: { from_level: number; to_level: number };
   notification_permission_asked: { outcome: 'granted' | 'denied' | 'undetermined' };
+  // Slice 2 Plan 1
+  group_created: { group_id: string; theme: string };
+  group_join_attempted: { code_present: boolean };
+  group_joined: { group_id: string; new_member_count: number };
+  group_left: { group_id: string; was_owner: boolean; group_deleted: boolean };
+  member_kicked: { group_id: string };
+  invite_code_regenerated: { group_id: string };
+  invite_code_shared: { group_id: string };
 };
 
 export type EventName = keyof EventPayloads;

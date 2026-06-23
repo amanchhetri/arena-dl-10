@@ -1,4 +1,4 @@
-// Hand-written from supabase/migrations/0001..0004. Regenerate with
+// Hand-written from supabase/migrations/0001..0014. Regenerate with
 // `supabase gen types typescript --local > src/types/database.ts` once the
 // docker-credential helper is fixed locally.
 
@@ -8,6 +8,8 @@ export type ProofType = 'honor' | 'photo' | 'video' | 'peer';
 export type DeadlineType = 'none' | 'daily' | 'one_time' | 'expires_at';
 export type AcceptStatus = 'accepted' | 'completed' | 'expired' | 'abandoned';
 export type VerificationStatus = 'auto' | 'pending_peer' | 'approved' | 'rejected';
+export type GroupTheme = 'purple' | 'pink' | 'cyan' | 'flame' | 'lime' | 'gold';
+export type GroupRole = 'owner' | 'admin' | 'member';
 
 export interface UserRow {
   id: string;
@@ -66,6 +68,25 @@ export interface ChallengeCompletionRow {
   verification_status: VerificationStatus;
 }
 
+export interface GroupRow {
+  id: string;
+  name: string;
+  theme: GroupTheme;
+  invite_code: string;
+  created_by: string | null;
+  current_streak: number;
+  last_activity_date: string | null;
+  member_count: number;
+  created_at: string;
+}
+
+export interface GroupMemberRow {
+  group_id: string;
+  user_id: string;
+  role: GroupRole;
+  joined_at: string;
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -94,6 +115,16 @@ export interface Database {
           >;
         Update: Partial<ChallengeCompletionRow>;
       };
+      groups: {
+        Row: GroupRow;
+        Insert: Partial<GroupRow> & Pick<GroupRow, 'name' | 'invite_code'>;
+        Update: Partial<GroupRow>;
+      };
+      group_members: {
+        Row: GroupMemberRow;
+        Insert: Partial<GroupMemberRow> & Pick<GroupMemberRow, 'group_id' | 'user_id'>;
+        Update: Partial<GroupMemberRow>;
+      };
     };
     Views: Record<string, never>;
     Functions: {
@@ -121,6 +152,34 @@ export interface Database {
           new_streak: number;
           streak_changed: boolean;
         };
+      };
+      create_group: {
+        Args: { p_name: string; p_theme?: string };
+        Returns: { group_id: string; invite_code: string };
+      };
+      join_group: {
+        Args: { p_invite_code: string };
+        Returns: { group_id: string; member_count: number };
+      };
+      leave_group: {
+        Args: { p_group_id: string };
+        Returns: { left: boolean; group_deleted: boolean; new_owner?: string };
+      };
+      kick_member: {
+        Args: { p_group_id: string; p_target_user_id: string };
+        Returns: { kicked: boolean };
+      };
+      regenerate_invite_code: {
+        Args: { p_group_id: string };
+        Returns: { invite_code: string };
+      };
+      update_group: {
+        Args: { p_group_id: string; p_name?: string | null; p_theme?: string | null };
+        Returns: void;
+      };
+      delete_group: {
+        Args: { p_group_id: string };
+        Returns: void;
       };
     };
     Enums: Record<string, never>;

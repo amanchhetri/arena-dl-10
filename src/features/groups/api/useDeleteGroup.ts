@@ -1,0 +1,22 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { supabase } from '@/lib/supabase';
+import { useAuthStore } from '@/features/auth/store';
+
+export function useDeleteGroup() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (vars: { group_id: string }) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { error } = await (supabase.rpc as any)('delete_group', {
+        p_group_id: vars.group_id,
+      });
+      if (error) throw error;
+    },
+    onSuccess: async (_data, vars) => {
+      const userId = useAuthStore.getState().session?.user.id;
+      qc.removeQueries({ queryKey: ['groups', 'single', vars.group_id] });
+      qc.removeQueries({ queryKey: ['groups', 'members', vars.group_id] });
+      await qc.invalidateQueries({ queryKey: ['groups', 'mine', userId] });
+    },
+  });
+}

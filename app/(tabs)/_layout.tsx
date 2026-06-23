@@ -27,6 +27,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="groups"
+        options={{
+          title: t('tabs.groups'),
+          tabBarIcon: ({ color }) => <Icon.Groups {...ICON_DEFAULTS} color={color as string} />,
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: t('tabs.profile'),

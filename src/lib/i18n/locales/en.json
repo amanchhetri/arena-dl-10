@@ -42,7 +42,82 @@
   "tabs": {
     "home": "Home",
     "catalog": "Catalog",
+    "groups": "Groups",
     "profile": "Profile"
+  },
+  "groups": {
+    "title": "Groups",
+    "list": {
+      "empty": {
+        "title": "Your crew, your challenges",
+        "body": "Create a group or join with an invite code.",
+        "create": "Create a group",
+        "join": "Join with code"
+      },
+      "memberCount": "{{count}} of 25"
+    },
+    "create": {
+      "title": "Create a group",
+      "namePlaceholder": "Hockey Squad",
+      "themeLabel": "Theme",
+      "button": "Create"
+    },
+    "join": {
+      "title": "Join a group",
+      "prompt": "Drop in the invite code your friend shared.",
+      "codePlaceholder": "XXXXXX",
+      "paste": "Paste",
+      "button": "Join"
+    },
+    "home": {
+      "memberCount": "{{count}} of 25 members",
+      "inviteCode": "INVITE CODE",
+      "share": "Share",
+      "regenerate": "New code",
+      "codeCopied": "Copied to clipboard",
+      "settings": "Settings",
+      "members": "Members",
+      "comingSoon": "Feed & leaderboard coming in the next update."
+    },
+    "settings": {
+      "title": "Group settings",
+      "editName": "Edit name",
+      "editTheme": "Edit theme",
+      "regenerateCode": "Regenerate invite code",
+      "regenerateConfirm": "Regenerating invalidates the old code. Friends with the old code won't be able to join until you share the new one. Continue?",
+      "delete": "Delete group",
+      "deleteConfirmTitle": "Delete {{name}}?",
+      "deleteConfirmBody": "This wipes the group and removes all members. There is no undo.",
+      "deleteConfirmAction": "Yes, delete the group",
+      "leave": "Leave group",
+      "leaveConfirmTitle": "Leave {{name}}?",
+      "leaveConfirmBody": "You can rejoin later if you still have the invite code.",
+      "leaveConfirmAction": "Leave",
+      "saved": "Saved"
+    },
+    "members": {
+      "title": "Members",
+      "roleOwner": "Owner",
+      "kick": "Kick",
+      "kickConfirmTitle": "Kick @{{username}}?",
+      "kickConfirmBody": "They'll be removed immediately and won't be able to rejoin unless you regenerate the invite code.",
+      "kickConfirmAction": "Yes, kick"
+    },
+    "edit": {
+      "nameTitle": "Group name",
+      "themeTitle": "Group theme",
+      "save": "Save"
+    },
+    "share": {
+      "message": "Join my Challenge Arena group \"{{name}}\": {{code}}"
+    },
+    "errors": {
+      "tooManyGroups": "You're already in 5 groups. Leave one to join another.",
+      "groupFull": "This group is full (25 of 25).",
+      "codeNotFound": "Invite code not found. Double-check with whoever shared it.",
+      "notOwner": "Only the group owner can do that.",
+      "selfKick": "Use Leave to remove yourself."
+    }
   },
   "catalog": {
     "title": "Catalog",

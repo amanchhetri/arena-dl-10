@@ -17,9 +17,9 @@ values
    'authenticated', 'authenticated', 'streak4@local', '', now(), now());
 
 -- A challenge to reference.
-insert into public.challenges (id, title, category, difficulty, xp_reward, proof_type, created_by)
+insert into public.challenges (id, title, category, difficulty, xp_reward, proof_type, created_by, group_id)
 values ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'T', 'habit', 'easy', 30, 'honor',
-        'a1111111-0000-0000-0000-000000000001');
+        'a1111111-0000-0000-0000-000000000001', 'ffffffff-ffff-ffff-ffff-ffffffffffff');
 
 -- Helper procedure: complete on a specific day
 create or replace function pg_temp.complete_on_day(p_user uuid, p_day date)
@@ -56,9 +56,9 @@ end $$;
 select pg_temp.complete_on_day('b2222222-0000-0000-0000-000000000002'::uuid, '2026-06-01'::date);
 
 -- second completion same day — need a second challenge to avoid uniqueness violation
-insert into public.challenges (id, title, category, difficulty, xp_reward, proof_type, created_by)
+insert into public.challenges (id, title, category, difficulty, xp_reward, proof_type, created_by, group_id)
 values ('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'T2', 'habit', 'easy', 30, 'honor',
-        'a1111111-0000-0000-0000-000000000001');
+        'a1111111-0000-0000-0000-000000000001', 'ffffffff-ffff-ffff-ffff-ffffffffffff');
 
 do $$
 declare a_id uuid;

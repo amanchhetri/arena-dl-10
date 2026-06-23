@@ -8,14 +8,14 @@ values
   ('62222222-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000000',
    'authenticated', 'authenticated', 'sub2@local', '', now(), now());
 
-insert into public.challenges (id, title, category, difficulty, xp_reward, proof_type, created_by)
+insert into public.challenges (id, title, category, difficulty, xp_reward, proof_type, created_by, group_id)
 values
   ('a1111111-1111-1111-1111-111111111111', 'Honor C', 'habit', 'easy', 30, 'honor',
-   '51111111-0000-0000-0000-000000000001'),
+   '51111111-0000-0000-0000-000000000001', 'ffffffff-ffff-ffff-ffff-ffffffffffff'),
   ('a2222222-2222-2222-2222-222222222222', 'Photo C', 'habit', 'easy', 50, 'photo',
-   '51111111-0000-0000-0000-000000000001'),
+   '51111111-0000-0000-0000-000000000001', 'ffffffff-ffff-ffff-ffff-ffffffffffff'),
   ('a3333333-3333-3333-3333-333333333333', 'Expired C', 'habit', 'easy', 40, 'honor',
-   '51111111-0000-0000-0000-000000000001');
+   '51111111-0000-0000-0000-000000000001', 'ffffffff-ffff-ffff-ffff-ffffffffffff');
 
 update public.challenges set
   deadline_type = 'expires_at',

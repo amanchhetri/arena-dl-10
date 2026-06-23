@@ -63,9 +63,9 @@ end $$;
 ------------------------------------------------------------
 -- 0002 challenges — enum + xp bounds + deadline check
 ------------------------------------------------------------
-insert into public.challenges (id, title, category, difficulty, xp_reward, proof_type, created_by)
+insert into public.challenges (id, title, category, difficulty, xp_reward, proof_type, created_by, group_id)
   values ('11111111-1111-1111-1111-111111111111', 'T', 'habit', 'easy', 30, 'photo',
-          '00000000-0000-0000-0000-000000000002');
+          '00000000-0000-0000-0000-000000000002', 'ffffffff-ffff-ffff-ffff-ffffffffffff');
 
 do $$ begin
   begin

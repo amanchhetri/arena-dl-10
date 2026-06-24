@@ -39,6 +39,10 @@ export type EventPayloads = {
   };
   group_challenge_updated: { group_id: string; challenge_id: string };
   group_challenge_deleted: { group_id: string; challenge_id: string; by_owner: boolean };
+  // Slice 2 Plan 3a
+  group_feed_viewed: { group_id: string; events_shown: number };
+  group_flame_grew: { group_id: string; new_streak: number };
+  group_flame_broke: { group_id: string; previous_streak: number };
 };
 
 export type EventName = keyof EventPayloads;

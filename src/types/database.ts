@@ -87,6 +87,24 @@ export interface GroupMemberRow {
   joined_at: string;
 }
 
+export type ActivityEventType =
+  | 'challenge_completed'
+  | 'joined_group'
+  | 'level_up'
+  | 'group_flame_lit'
+  | 'group_flame_broken'
+  | 'group_flame_milestone';
+
+export interface ActivityEventRow {
+  id: string;
+  group_id: string | null;
+  actor_user_id: string;
+  event_type: ActivityEventType;
+  target_id: string | null;
+  payload: Record<string, unknown> | null;
+  created_at: string;
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -124,6 +142,11 @@ export interface Database {
         Row: GroupMemberRow;
         Insert: Partial<GroupMemberRow> & Pick<GroupMemberRow, 'group_id' | 'user_id'>;
         Update: Partial<GroupMemberRow>;
+      };
+      activity_events: {
+        Row: ActivityEventRow;
+        Insert: Partial<ActivityEventRow> & Pick<ActivityEventRow, 'actor_user_id' | 'event_type'>;
+        Update: Partial<ActivityEventRow>;
       };
     };
     Views: Record<string, never>;

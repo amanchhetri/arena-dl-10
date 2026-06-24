@@ -267,6 +267,32 @@
       "peerNotSupported": "Peer-approval proof isn't supported yet."
     }
   },
+  "feed": {
+    "section": {
+      "title": "ACTIVITY",
+      "seeAll": "See all"
+    },
+    "empty": {
+      "label": "No activity yet — complete a challenge to get the group going"
+    },
+    "screen": {
+      "title": "Activity",
+      "empty": "Nothing here yet"
+    },
+    "events": {
+      "challengeCompleted": "completed {{title}}",
+      "joinedGroup": "joined the group",
+      "levelUp": "reached Level {{level}}",
+      "flameLit": "The group flame is alive today",
+      "flameMilestone": "{{streak}}-day flame! Keep it up.",
+      "flameBroken": "The flame broke."
+    },
+    "xpBadge": "+{{xp}} XP"
+  },
+  "groupFlame": {
+    "active": "{{streak}} day flame",
+    "dormant": "Light it today"
+  },
   "legal": {
     "terms": "Terms",
     "privacy": "Privacy"

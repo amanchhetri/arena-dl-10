@@ -6,6 +6,7 @@ import { InviteCodeCard } from '@/features/groups/components/InviteCodeCard';
 import { GroupChallengesSection } from '@/features/groups/components/GroupChallengesSection';
 import { GroupFlameChip } from '@/features/groups/components/GroupFlameChip';
 import { GroupFeedSection } from '@/features/groups/components/GroupFeedSection';
+import { LeaderboardPodium } from '@/features/groups/components/LeaderboardPodium';
 import { useGroup } from '@/features/groups/api/useGroup';
 import { useGroupMembers } from '@/features/groups/api/useGroupMembers';
 import { useShareInviteCode } from '@/features/groups/api/useShareInviteCode';
@@ -62,6 +63,11 @@ export default function GroupHome() {
         <GroupFeedSection
           groupId={group.id}
           onSeeAll={() => router.push(`/groups/${group.id}/feed`)}
+        />
+
+        <LeaderboardPodium
+          groupId={group.id}
+          onPress={() => router.push(`/groups/${group.id}/leaderboard`)}
         />
 
         <GroupChallengesSection

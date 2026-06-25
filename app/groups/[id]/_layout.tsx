@@ -15,6 +15,7 @@ export default function GroupLayout() {
       <Stack.Screen name="edit-name" options={{ presentation: 'modal', title: '' }} />
       <Stack.Screen name="edit-theme" options={{ presentation: 'modal', title: '' }} />
       <Stack.Screen name="feed" options={{ title: 'Activity' }} />
+      <Stack.Screen name="leaderboard" options={{ title: 'Leaderboard' }} />
     </Stack>
   );
 }

@@ -4,6 +4,8 @@ import { ThemeAccent } from '@/features/groups/components/ThemeAccent';
 import { MemberAvatarRow } from '@/features/groups/components/MemberAvatarRow';
 import { InviteCodeCard } from '@/features/groups/components/InviteCodeCard';
 import { GroupChallengesSection } from '@/features/groups/components/GroupChallengesSection';
+import { GroupFlameChip } from '@/features/groups/components/GroupFlameChip';
+import { GroupFeedSection } from '@/features/groups/components/GroupFeedSection';
 import { useGroup } from '@/features/groups/api/useGroup';
 import { useGroupMembers } from '@/features/groups/api/useGroupMembers';
 import { useShareInviteCode } from '@/features/groups/api/useShareInviteCode';
@@ -35,13 +37,18 @@ export default function GroupHome() {
     <SafeAreaView className="flex-1 bg-bg-base">
       <ScrollView contentContainerStyle={{ padding: 24, gap: 16 }}>
         <View className="flex-row items-center justify-between">
-          <View className="flex-row items-center gap-3">
+          <View className="flex-1 flex-row items-center gap-3">
             <ThemeAccent theme={group.theme} size={20} />
-            <Text className="font-display text-3xl text-text-primary">{group.name}</Text>
+            <Text className="font-display text-3xl text-text-primary" numberOfLines={1}>
+              {group.name}
+            </Text>
           </View>
-          <Pressable onPress={() => router.push(`/groups/${group.id}/settings`)} className="p-2">
-            <Icon.Settings {...ICON_DEFAULTS} color="#F4F4F8" />
-          </Pressable>
+          <View className="ml-2 flex-row items-center gap-2">
+            <GroupFlameChip currentStreak={group.current_streak} />
+            <Pressable onPress={() => router.push(`/groups/${group.id}/settings`)} className="p-2">
+              <Icon.Settings {...ICON_DEFAULTS} color="#F4F4F8" />
+            </Pressable>
+          </View>
         </View>
 
         <Text className="text-text-muted">
@@ -51,6 +58,11 @@ export default function GroupHome() {
         <Pressable onPress={() => router.push(`/groups/${group.id}/members`)}>
           <MemberAvatarRow members={members ?? []} maxShown={5} />
         </Pressable>
+
+        <GroupFeedSection
+          groupId={group.id}
+          onSeeAll={() => router.push(`/groups/${group.id}/feed`)}
+        />
 
         <GroupChallengesSection
           groupId={group.id}

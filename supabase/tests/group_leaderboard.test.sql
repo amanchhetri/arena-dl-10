@@ -48,7 +48,17 @@ select public.join_group(:'lb_code');
 set local "request.jwt.claims" = '{"sub":"44444444-1b00-0000-0000-000000000004","role":"authenticated"}';
 select public.join_group(:'lb_code');
 
+-- Force distinct joined_at across members so tie-breaker tests are deterministic.
+-- group_members has no UPDATE RLS policy, so we reset role before mutating.
 reset role;
+update public.group_members
+   set joined_at = case user_id
+     when '22222222-1b00-0000-0000-000000000002'::uuid then now() - interval '3 hours'
+     when '33333333-1b00-0000-0000-000000000003'::uuid then now() - interval '2 hours'
+     when '44444444-1b00-0000-0000-000000000004'::uuid then now() - interval '1 hour'
+     else joined_at
+   end
+ where group_id = (select id from public.groups where name='LB Crew');
 
 -- ----------------------------------------------------------------------------
 -- Seed completions directly (bypassing submit_completion to avoid event side

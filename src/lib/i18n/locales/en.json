@@ -293,6 +293,30 @@
     "active": "{{streak}} day flame",
     "dormant": "Light it today"
   },
+  "leaderboard": {
+    "screen": {
+      "title": "Leaderboard"
+    },
+    "tabs": {
+      "thisWeek": "This week",
+      "allTime": "All-time"
+    },
+    "preview": {
+      "title": "TOP THIS WEEK",
+      "seeAll": "See all"
+    },
+    "empty": {
+      "screen": "No XP earned in this group yet — be the first",
+      "preview": "No XP this week yet"
+    },
+    "rank": {
+      "noRank": "—"
+    },
+    "xp": "{{xp}} XP",
+    "errors": {
+      "notMember": "You're not a member of this group"
+    }
+  },
   "legal": {
     "terms": "Terms",
     "privacy": "Privacy"

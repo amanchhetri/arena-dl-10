@@ -43,6 +43,14 @@ export type EventPayloads = {
   group_feed_viewed: { group_id: string; events_shown: number };
   group_flame_grew: { group_id: string; new_streak: number };
   group_flame_broke: { group_id: string; previous_streak: number };
+  // Slice 2 Plan 3b
+  leaderboard_viewed: { group_id: string; period: 'lifetime' | 'this_week'; rows_shown: number };
+  leaderboard_period_switched: {
+    group_id: string;
+    from: 'lifetime' | 'this_week';
+    to: 'lifetime' | 'this_week';
+  };
+  leaderboard_preview_tapped: { group_id: string };
 };
 
 export type EventName = keyof EventPayloads;

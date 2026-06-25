@@ -105,6 +105,19 @@ export interface ActivityEventRow {
   created_at: string;
 }
 
+export type LeaderboardPeriod = 'lifetime' | 'this_week';
+
+export interface LeaderboardRow {
+  user_id: string;
+  username: string;
+  display_name: string;
+  avatar_url: string | null;
+  role: GroupRole;
+  joined_at: string;
+  xp_total: number;
+  rank: number | null;
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -228,6 +241,10 @@ export interface Database {
       delete_group_challenge: {
         Args: { p_challenge_id: string };
         Returns: void;
+      };
+      get_group_leaderboard: {
+        Args: { p_group_id: string; p_period: LeaderboardPeriod };
+        Returns: LeaderboardRow[];
       };
     };
     Enums: Record<string, never>;
